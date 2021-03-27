@@ -5,10 +5,34 @@ class Database extends PDO{
 		parent::__construct($dsn, $user, $pass);
 
 	}
+/* join 4 tables */
 
+/*
+	$data = array(
+		'TableMain'		 => array('TableMain' => 'product'),
+		'Tablea'			   => array('Tablea'    => 'category'),
+		'Tableb'			 => array('Tableb'    => 'brand'),
+		'Tablec'			 => array('Tablec'    => 'subcat'),
+
+		'Mainconda'			   => array('Mainconda' => 'category'),
+		'Maincondb'			 => array('Maincondb' => 'brand'),
+		'Maincondc'			 => array('Maincondc' => 'subcategory'),
+
+		'Conda'			   => array('Conda' => 'catid'),
+		'Condb'			 => array('Condb' => 'brandid'),
+		'Condc'			 => array('Condc' => 'subid'),
+
+		'selectcond' => array('select' => '*'),
+		//'orderby'	  => array('order'  => 'DESC'),
+		'pkey'       => array('pkey'   => 'id'),
+		//'limit' 	  => array('start'  => 0,'limit' => 2),
+		'wherecond'=> array('where'  =>array('id' => base64_decode($id)))
+	);
+
+	 $data["data"]  = $Model->join($data);
+*/
 public function join($data){
 	$sql = "SELECT ";
-	
 	
 	if(array_key_exists('selectcond',$data)){
 				foreach($data['selectcond'] as $key => $value){
@@ -185,6 +209,22 @@ public function join($data){
 }
 
 	//Fetch All Data
+
+	/*
+		$data = array(
+        		'table'			 => array('table' => 'product'),
+        		//'pkey'			 => array('pkey' => 'catid'),
+        		'selectcond' => array('select' => '*'),
+        		//'orderby'	   => array('order' => 'DESC'),
+        		//'limit' 	 => array('start' => 2,'limit' => 3),
+        		'search'    => array('name' => $q),
+        		'wherecond'=> array('where' =>array('name' => $q,'productDetails' => $q))
+        	);
+        	
+			$Model = $this->load->model('Madmin');
+			$data['product'] = $Model->fetchdata($data);
+
+	*/
 	public function fetchdata($data = array()){
 		$sql  = 'SELECT ';
 
@@ -285,6 +325,13 @@ public function join($data){
 	//Fetch All Data
 
 	//Insert Data Into Database
+
+	/* $data = array(
+		'name'     => $name
+	);
+	$table ="table";
+	DB::insertdata($data,$table); */
+
 	public function insertdata($data,$table){
 		$keys   = implode(",",array_keys($data));
 		$values = ":".implode(", :",array_keys($data));
@@ -300,6 +347,18 @@ public function join($data){
 	//Insert Data Into Database
 
 	//Update Data Into Database
+
+	/*
+	$requr = array(
+		'table'			 => array('table' => 'login'),
+		//'wherecond'=> array('where' =>array('catid' => 156))
+	);
+	$data = array(
+		'data' => $data
+	);
+	update($data,$requr);
+	*/
+
 	public function update($table,$data,$pkey,$id){
 		$upkey = NULL;
 
@@ -320,7 +379,16 @@ public function join($data){
 	}
 	//Update Data Into Database
 
+
+	
+
 	//Delete Data From Database
+
+	/* $data = array(
+    	'table'			 => array('table' => 'product'),
+		'wherecond'  => array('where' =>array('id' => base64_decode($id)))
+	); */
+
 	public function delete($data){
 		$sql = "DELETE FROM ";
 		
