@@ -3,9 +3,7 @@
 		public function __construct(){
 			parent::__construct();
 		}
-		public function index($val1, $val2){
-			echo $sdfdfdsd;
-			echo $val2;
+		public function index(){
             $this->load->view("index");
 		}
 		
