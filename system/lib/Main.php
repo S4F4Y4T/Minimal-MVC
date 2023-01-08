@@ -1,9 +1,9 @@
 <?php
 class Main{
 	public $url;
-	public $Controller = "Indexs";
+	public $Controller = "Default_controller";
 	public $Path       = "app/controller/";
-	public $Method      = "Index";
+	public $Method      = "index";
 	public $ctlr;
 	public $param;
 
@@ -21,12 +21,6 @@ class Main{
 		}else{
 			unset($this->url);
 		}
-		
-		if(isset($this->url[1])){
-		    if($this->url[1] == 'footer' || $this->url[1] == 'header'){
-		        header("Location: ".BASE);
-		    }
-	    }
 	}
     
 	public function loadCtlr(){
@@ -41,52 +35,49 @@ class Main{
 				if(class_exists($this->Controller)){
 					$this->ctlr = new $this->Controller();
 				}else{
-					header("Location: ". BASE ."/Indexs/error");
+					echo "<h1><center>An error occurred: Class does not exist</center></h1>";
+					exit();
 				}
 			}else{
-				header("Location: ". BASE ."/Indexs/error");
+				echo "<h1><center>An error occurred: Controller not found</center></h1>";
+				exit();
 			}
 		}
 	}
 
 	public function loadMethod(){
-		if(isset($this->url[4])){
-			$this->Method = $this->url[1];
+
+		if(is_array($this->url) && count($this->url) > 2){
+
+			$url = array_splice($this->url, 0, 2);
+			$this->Method = $url[1];
+
 			if(method_exists($this->ctlr, $this->Method)){
-				$this->ctlr->{$this->Method}($this->url[2],$this->url[3],$this->url[4]);
+				$this->ctlr->{$this->Method}(...$this->url);
 			}else{
-				header("Location: ". BASE ."/Indexs/error");
+				echo "<h1><center>An error occurred: Method not found</center></h1>";
+				exit();
 			}
-		}else if(isset($this->url[3])){
-			$this->Method = $this->url[1];
-			if(method_exists($this->ctlr, $this->Method)){
-				$this->ctlr->{$this->Method}($this->url[2],$this->url[3]);
-			}else{
-				header("Location: ". BASE ."/Indexs/error");
-			}
-		}else if(isset($this->url[2])){
-			$this->Method = $this->url[1];
-			if(method_exists($this->ctlr, $this->Method)){
-				$this->ctlr->{$this->Method}($this->url[2]);
-			}else{
-				header("Location: ". BASE ."/Indexs/error");
-			}
+
 		}else if(isset($this->url[1])){
-			if(isset($this->url[1])){
-				$this->Method = $this->url[1];
-				if(method_exists($this->ctlr, $this->Method)){
-					$this->ctlr->{$this->Method}();
-				}else{
-					header("Location: ". BASE ."/Indexs/error");
-				}
+
+			$this->Method = $this->url[1];
+			if(method_exists($this->ctlr, $this->Method)){
+				$this->ctlr->{$this->Method}();
+			}else{
+				echo "<h1><center>An error occurred: Method not found</center></h1>";
+				exit();
 			}
+
 		}else{
 			if(method_exists($this->ctlr, $this->Method)){
-					$this->ctlr->{$this->Method}();
-				}else{
-					header("Location: ". BASE ."/Indexs/error");
-				}
+				$this->ctlr->{$this->Method}();
+			}else{
+				echo "<h1><center>An error occurred: Method not found</center></h1>";
+				exit();
+			}
 		}
+
 	}
 
 }
