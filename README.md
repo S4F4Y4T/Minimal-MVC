@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 ###################
-What is Minimal-MVC
+Minimal-MVC
 ###################
 
 Minimal-MVC is an Application Development Framework - which is light weight,easy to use and you can start developing rightaway
