@@ -1,7 +1,7 @@
 <?php
 class Main{
 	public $url;
-	public $Controller = "Default_controller";
+	public $Controller = "Home";
 	public $Path       = "app/controller/";
 	public $Method      = "index";
 	public $ctlr;
@@ -47,7 +47,7 @@ class Main{
 
 	public function loadMethod(){
 
-		if(is_array($this->url) && count($this->url) > 2){
+		if(isset($this->url) && is_array($this->url) && count($this->url) > 2){
 
 			$url = array_splice($this->url, 0, 2);
 			$this->Method = $url[1];
