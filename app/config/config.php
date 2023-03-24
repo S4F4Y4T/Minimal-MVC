@@ -1,6 +1,6 @@
 <?php
 	define("host","localhost");
-	define("dbname","ecommerce");
+	define("dbname","payments");
 	define("user","user");
 	define("pass","skidie1337");
 ?>

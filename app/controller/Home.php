@@ -12,5 +12,12 @@ defined('BASEPATH') or exit('Direct access not allowed');
 		public function index(){
 			echo "<h1><center>Welcome to Minimal-MVC</center></h1>";
 		}
+
+		public function transaction(){
+			$fetch = $this->home->fetch();
+			echo "<pre>";
+			var_dump($fetch);
+			exit();
+		}
 }
 ?>

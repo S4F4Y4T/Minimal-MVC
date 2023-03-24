@@ -1,6 +1,5 @@
 <?php
 
-	
 class Mmodel{
 	
 	private $host 	= host;
